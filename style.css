@@ -1,0 +1,75 @@
+:root {
+    --nu-red: #C8102E;
+    --nu-black: #000000;
+    --nu-white: #FFFFFF;
+}
+
+.stApp {
+    background-color: var(--nu-white);
+    color: var(--nu-black);
+}
+
+.nu-title {
+    text-align: center;
+    color: var(--nu-black);
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.nu-title .accent {
+    color: var(--nu-red);
+}
+
+.nu-intro {
+    color: var(--nu-black);
+    font-size: 1.05rem;
+    max-width: 760px;
+    text-align: center !important;
+    margin: 0 auto 1.5rem auto !important;
+}
+
+.nu-intro a {
+    color: var(--nu-red);
+    font-weight: 600;
+}
+
+.nu-subheading {
+    text-align: center;
+}
+
+@media (min-width: 769px) {
+    [data-testid="stHorizontalBlock"] {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 2rem;
+    }
+
+    [data-testid="stHorizontalBlock"] > [data-testid="column"],
+    [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+        width: 50% !important;
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    [data-testid="stHorizontalBlock"] {
+        flex-direction: column !important;
+    }
+
+    [data-testid="stHorizontalBlock"] > [data-testid="column"],
+    [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+    }
+
+    .nu-title {
+        font-size: 1.7rem;
+    }
+
+    .nu-intro {
+        font-size: 0.95rem;
+    }
+}
