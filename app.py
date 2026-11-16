@@ -1,6 +1,7 @@
 import streamlit as st # for web apps in Python
 import pandas as pd # for tabular data
 import plotly.express as px # creates interactive charts
+from pathlib import Path # points to files on disk
 
 st.set_page_config(
     page_title="Shakespeare's Dark & Light",
@@ -11,8 +12,7 @@ st.set_page_config(
 NU_RED = "#C8102E"
 NU_BLACK = "#000000"
 
-with open("style.css") as css_file:
-    st.markdown(f"<style>{css_file.read()}</style>", unsafe_allow_html=True)
+st.html(Path("style.css"))
 
 st.markdown(
     """
