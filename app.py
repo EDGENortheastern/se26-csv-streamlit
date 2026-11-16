@@ -46,11 +46,15 @@ lightest = light_df.groupby("play")["word_count"].sum().nlargest(10).reset_index
 
 dark_fig = px.bar(darkest, x="word_count", y="play", orientation="h",
                   title="💀 Shakespeare's Darkest Works",
+                  labels={"word_count": "💀 Dark Words", "play": "📜 Play"},
                   color_discrete_sequence=[NU_BLACK])
+dark_fig.update_layout(title_x=0.5, title_xanchor="center")
 
 light_fig = px.bar(lightest, x="word_count", y="play", orientation="h",
                    title="🌹 Shakespeare's Lightest Works",
+                   labels={"word_count": "🌹 Light Words", "play": "📜 Play"},
                    color_discrete_sequence=[NU_RED])
+light_fig.update_layout(title_x=0.5, title_xanchor="center")
 
 st.markdown("<h3 class='nu-subheading'>Dark versus light</h3>", unsafe_allow_html=True)
 
