@@ -64,7 +64,7 @@ light_fig.update_traces(
     hoverlabel=dict(bgcolor=NU_BLACK, bordercolor=NU_BLACK, font_color="#FFFFFF", font_size=14)
 )
 
-st.markdown("<h3 class='nu-subheading'>Dark versus light</h3>", unsafe_allow_html=True)
+st.markdown("<h3 class='nu-subheading'>Darkness vs Light</h3>", unsafe_allow_html=True)
 
 chart_left, chart_right = st.columns(2)
 
