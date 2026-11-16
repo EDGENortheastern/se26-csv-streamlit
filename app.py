@@ -49,12 +49,20 @@ dark_fig = px.bar(darkest, x="word_count", y="play", orientation="h",
                   labels={"word_count": "💀 Dark Words", "play": "📜 Play"},
                   color_discrete_sequence=[NU_BLACK])
 dark_fig.update_layout(title_x=0.5, title_xanchor="center")
+dark_fig.update_traces(
+    hovertemplate="<b>%{y}</b><br>Dark words: %{x}<extra></extra>",
+    hoverlabel=dict(bgcolor=NU_RED, bordercolor=NU_RED, font_color="#FFFFFF", font_size=14)
+)
 
 light_fig = px.bar(lightest, x="word_count", y="play", orientation="h",
                    title="🌹 Shakespeare's Lightest Works",
                    labels={"word_count": "🌹 Light Words", "play": "📜 Play"},
                    color_discrete_sequence=[NU_RED])
 light_fig.update_layout(title_x=0.5, title_xanchor="center")
+light_fig.update_traces(
+    hovertemplate="<b>%{y}</b><br>Light words: %{x}<extra></extra>",
+    hoverlabel=dict(bgcolor=NU_BLACK, bordercolor=NU_BLACK, font_color="#FFFFFF", font_size=14)
+)
 
 st.markdown("<h3 class='nu-subheading'>Dark versus light</h3>", unsafe_allow_html=True)
 
