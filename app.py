@@ -10,7 +10,6 @@ st.set_page_config(
 
 NU_RED = "#C8102E"
 NU_BLACK = "#000000"
-NU_WHITE = "#FFFFFF"
 
 with open("style.css") as css_file:
     st.markdown(f"<style>{css_file.read()}</style>", unsafe_allow_html=True)
@@ -39,71 +38,19 @@ light_words = [
 ]
 
 
-def top_works(words):
-    return (
-        shakespeare_df[shakespeare_df["word"].isin(words)]
-        .groupby("play", as_index=False)["word_count"].sum()
-        .nlargest(10, "word_count")
-        .sort_values("word_count")
-    )
+dark_df = shakespeare_df[shakespeare_df["word"].isin(dark_words)]
+darkest = dark_df.groupby("play")["word_count"].sum().nlargest(10).reset_index()
 
+light_df = shakespeare_df[shakespeare_df["word"].isin(light_words)]
+lightest = light_df.groupby("play")["word_count"].sum().nlargest(10).reset_index()
 
-def styled_bar(df, title, x_label, bar_colour, hover_bg, hover_font, hover_word):
-    fig = px.bar(
-        df,
-        x="word_count",
-        y="play",
-        orientation="h",
-        title=title,
-        labels={"word_count": x_label, "play": "Work"}
-    )
-    fig.update_traces(
-        marker_color=bar_colour,
-        hovertemplate=f"<b>%{{y}}</b><br>%{{x}} {hover_word}<extra></extra>",
-        hoverlabel=dict(
-            bgcolor=hover_bg,
-            bordercolor=hover_bg,
-            font_color=hover_font,
-            font_size=14
-        )
-    )
-    fig.update_layout(
-        template="plotly_white",
-        height=550,
-        showlegend=False,
-        paper_bgcolor=NU_WHITE,
-        plot_bgcolor=NU_WHITE,
-        font=dict(color=NU_BLACK),
-        title_font=dict(size=20, color=NU_BLACK),
-        title_x=0.5,
-        title_xanchor="center",
-        margin=dict(l=10, r=10, t=60, b=40)
-    )
-    return fig
+dark_fig = px.bar(darkest, x="word_count", y="play", orientation="h",
+                  title="💀 Shakespeare's Darkest Works",
+                  color_discrete_sequence=[NU_BLACK])
 
-
-darkest = top_works(dark_words)
-lightest = top_works(light_words)
-
-dark_fig = styled_bar(
-    darkest,
-    title="💀 Shakespeare's Darkest Works",
-    x_label="Dark Word Frequency",
-    bar_colour=NU_BLACK,
-    hover_bg=NU_RED,
-    hover_font=NU_WHITE,
-    hover_word="dark words"
-)
-
-light_fig = styled_bar(
-    lightest,
-    title="🌹 Shakespeare's Lightest Works",
-    x_label="Light Word Frequency",
-    bar_colour=NU_RED,
-    hover_bg=NU_BLACK,
-    hover_font=NU_WHITE,
-    hover_word="light words"
-)
+light_fig = px.bar(lightest, x="word_count", y="play", orientation="h",
+                   title="🌹 Shakespeare's Lightest Works",
+                   color_discrete_sequence=[NU_RED])
 
 st.markdown("<h3 class='nu-subheading'>Dark versus light</h3>", unsafe_allow_html=True)
 
